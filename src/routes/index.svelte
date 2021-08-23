@@ -116,18 +116,11 @@
 
     // Line1
     const line1Text = new Konva.Text({
-      fontSize: 64,
+      fontSize: 96,
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'bold',
-      fill: '#000',
+      fill: 'white',
       text: line_1,
-      stroke: '#fff',
-      strokeWidth: 5,
-      fillAfterStrokeEnabled: true,
-      shadowColor: 'white',
-      shadowBlur: 15,
-      shadowOffset: { x: 0, y: 0 },
-      shadowOpacity: 1,
       draggable: true,
       x: 100,
       y: 130,
@@ -137,39 +130,25 @@
 
     // Line2
     const line2Text = new Konva.Text({
-      fontSize: 64,
+      fontSize: 96,
       fontFamily: 'ThaiSansNeue',
-      fontStyle: 'bold',
-      fill: '#000',
+      fontStyle: 'italic bold',
+      fill: '#FFFF33',
       text: line_2,
-      stroke: '#fff',
-      strokeWidth: 5,
-      fillAfterStrokeEnabled: true,
-      shadowColor: 'white',
-      shadowBlur: 15,
-      shadowOffset: { x: 0, y: 0 },
-      shadowOpacity: 1,
       draggable: true,
       x: 100,
-      y: 450,
+      y: 480,
     });
     layer.add(line2Text);
     line2TextTr = addTransformer(layer, line2Text);
 
     // Line3
     const line3Text = new Konva.Text({
-      fontSize: 64,
+      fontSize: 84,
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'bold',
-      fill: '#000',
+      fill: 'white',
       text: line_3,
-      stroke: '#fff',
-      strokeWidth: 5,
-      fillAfterStrokeEnabled: true,
-      shadowColor: 'white',
-      shadowBlur: 15,
-      shadowOffset: { x: 0, y: 0 },
-      shadowOpacity: 1,
       draggable: true,
       x: 200,
       y: 800,
@@ -181,22 +160,25 @@
     const creditsText = new Konva.Text({
       fontSize: 32,
       fontFamily: 'ThaiSansNeue',
-      fontStyle: 'bold',
-      fill: '#000',
+      fill: 'white',
       text: '',
-      stroke: '#fff',
-      strokeWidth: 4,
-      fillAfterStrokeEnabled: true,
-      shadowColor: 'white',
-      shadowBlur: 15,
-      shadowOffset: { x: 0, y: 0 },
-      shadowOpacity: 1,
-      draggable: true,
       x: 400,
       y: 1040,
     });
     layer.add(creditsText);
     creditsText.text('https://seri-answers.vercel.app');
+
+    // Credit
+    const titleText = new Konva.Text({
+      fontSize: 32,
+      fontFamily: 'ThaiSansNeue',
+      fill: 'white',
+      text: '',
+      x: 910,
+      y: 32,
+    });
+    layer.add(titleText);
+    titleText.text('คำตอบแบบเสรีๆ');
 
     const eventResizeHandler = () => {
       const container = document.getElementById('canvasParent');
@@ -289,7 +271,7 @@
 
 <main class={tw`h-screen flex flex-col items-center mt-8`}>
   <h1 class={tw`text(6xl) my-2`}>Seri Answers</h1>
-  <p>สร้างคำตอบอย่างเสรี</p>
+  <p>สร้างคำตอบแบบเสรีๆ</p>
   <div class={tw`w-full flex flex-col lg:flex-row w-[96vw] lg:w-[80vw] h-3/5 mt-4`}>
     <div id="canvasParent" class={tw`w-full lg:w-1/2 text(center) flex items-start mb-4`}>
       <div id="canvasEditor" class={tw`w-full h-full`} />
@@ -297,22 +279,19 @@
 
     <div class={tw`w-full lg:w-1/2 pl-0 lg:pl-4 flex-col items-start`}>
       <div class={tw`my-2`}>
-        Line 1. <input
-          type="text"
+        Line 1. <textarea
           bind:value={line_1}
           class={tw`mt-1 p-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border border-gray-300 rounded-md`}
         />
       </div>
       <div class={tw`my-2`}>
-        Line 2. <input
-          type="text"
+        Line 2. <textarea
           bind:value={line_2}
           class={tw`mt-1 p-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border border-gray-300 rounded-md`}
         />
       </div>
       <div class={tw`my-2`}>
-        Line 3. <input
-          type="text"
+        Line 3. <textarea
           bind:value={line_3}
           class={tw`mt-1 p-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border border-gray-300 rounded-md`}
         />
