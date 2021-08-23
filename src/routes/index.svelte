@@ -285,17 +285,8 @@
   <h1 class={tw`text(6xl) my-2`}>Seri Answers</h1>
   <p>สร้างคำตอบแบบเสรีๆ</p>
   <div class={tw`w-full flex flex-col lg:flex-row w-[96vw] lg:w-[80vw] h-3/5 mt-4`}>
-    <div>
-      <div id="canvasParent" class={tw`w-full lg:w-1/2 text(center) flex items-start mb-4`}>
-        <div id="canvasEditor" class={tw`w-full h-full`} />
-      </div>
-      <div>
-        <a
-          class={tw`underline italic`}
-          href="https://www.facebook.com/researcher.th"
-          target="_blank">ขอบคุณภาพจาก The Researcher</a
-        >
-      </div>
+    <div id="canvasParent" class={tw`w-full lg:w-1/2 text(center) flex items-start mb-4`}>
+      <div id="canvasEditor" class={tw`w-full h-full`} />
     </div>
 
     <div class={tw`w-full lg:w-1/2 pl-0 lg:pl-4 flex-col items-start`}>
@@ -322,6 +313,13 @@
         <button
           class={tw`w-full py-4 px-8 rounded bg-gray-300 text-2xl font-bold`}
           on:click={() => download()}>เซฟรูป</button
+        >
+      </div>
+      <div class={tw`my-2`}>
+        <a
+          class={tw`underline italic`}
+          href="https://www.facebook.com/researcher.th"
+          target="_blank">ขอบคุณภาพจาก The Researcher</a
         >
       </div>
     </div>
