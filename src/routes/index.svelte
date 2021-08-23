@@ -6,7 +6,7 @@
   import Kofi from '../lib/Kofi.svelte';
   import template from '../../static/template.png';
 
-  const url = 'https://olym-pic.vercel.app';
+  const url = 'https://seri-answers.vercel.app';
 
   const sceneWidth = 1080;
   const sceneHeight = 1080;
@@ -116,6 +116,7 @@
 
     // Line1
     const line1Text = new Konva.Text({
+      align: 'center',
       fontSize: 96,
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'bold',
@@ -130,6 +131,7 @@
 
     // Line2
     const line2Text = new Konva.Text({
+      align: 'center',
       fontSize: 96,
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'italic bold',
@@ -144,6 +146,7 @@
 
     // Line3
     const line3Text = new Konva.Text({
+      align: 'center',
       fontSize: 84,
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'bold',
@@ -168,7 +171,7 @@
     layer.add(creditsText);
     creditsText.text('https://seri-answers.vercel.app');
 
-    // Credit
+    // Title
     const titleText = new Konva.Text({
       fontSize: 32,
       fontFamily: 'ThaiSansNeue',
