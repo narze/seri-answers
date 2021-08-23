@@ -4,11 +4,7 @@
   import Konva from 'konva';
   import { Facebook, Twitter } from 'svelte-share-buttons-component';
   import Kofi from '../lib/Kofi.svelte';
-  import greenBackground from '../../static/green.jpg';
-  import blueBackground from '../../static/blue.jpg';
-  import orangeBackground from '../../static/orange.jpg';
-  import grayBackground from '../../static/gray.jpg';
-  import defaultPerson from '../../static/person.png';
+  import template from '../../static/template.png';
 
   const url = 'https://olym-pic.vercel.app';
 
@@ -19,14 +15,12 @@
   let layer: Konva.Layer;
   let usePresetBackgroundImage: (image: string) => void;
   let previewImage: (event: Event, imageId: 'background' | 'person') => void;
-  let previewText: (newText: string, textType: 'title' | 'quote' | 'nickname' | 'details') => void;
+  let previewText: (newText: string, textType: 'line_1' | 'line_2' | 'line_3') => void;
   let updateOpacity: (opacity: number) => void;
   let backgroundImage: Konva.Image;
-  let titleTextTr: Konva.Transformer;
-  let quoteTextTr: Konva.Transformer;
-  let nameTextTr: Konva.Transformer;
-  let detailsTextTr: Konva.Transformer;
-  let personImageTr: Konva.Transformer;
+  let line1TextTr: Konva.Transformer;
+  let line2TextTr: Konva.Transformer;
+  let line3TextTr: Konva.Transformer;
 
   class ImageSwitcher {
     constructor(private image: Konva.Image, private layer: Konva.Layer) {}
@@ -36,8 +30,6 @@
         this.image.image(img);
         this.layer.batchDraw();
       };
-      personImageTr?.remove();
-      personImageTr = addTransformer(this.layer, this.image, false);
       img.src = url;
     }
   }
@@ -120,27 +112,15 @@
     });
     layer.add(backgroundImage);
     const backgroundSwitcher = new ImageSwitcher(backgroundImage, layer);
-    backgroundSwitcher.switchImage(greenBackground);
+    backgroundSwitcher.switchImage(template);
 
-    // Person image
-    const personImage = new Konva.Image({
-      image: undefined as any,
-      draggable: true,
-      x: 300,
-      y: 230,
-      scale: { x: 1.7, y: 1.7 },
-    });
-    layer.add(personImage);
-    const personSwitcher = new ImageSwitcher(personImage, layer);
-    personSwitcher.switchImage(defaultPerson);
-
-    // Title
-    const titleText = new Konva.Text({
+    // Line1
+    const line1Text = new Konva.Text({
       fontSize: 64,
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'bold',
       fill: '#000',
-      text: quote,
+      text: line_1,
       stroke: '#fff',
       strokeWidth: 5,
       fillAfterStrokeEnabled: true,
@@ -150,73 +130,52 @@
       shadowOpacity: 1,
       draggable: true,
       x: 100,
-      y: 30,
+      y: 130,
     });
-    layer.add(titleText);
-    titleTextTr = addTransformer(layer, titleText);
+    layer.add(line1Text);
+    line1TextTr = addTransformer(layer, line1Text);
 
-    // Quote
-    const quoteText = new Konva.Text({
-      fontSize: 100,
-      fontFamily: 'ThaiSansNeue',
-      fontStyle: 'bold',
-      fill: '#ffa',
-      text: quote,
-      stroke: '#000',
-      strokeWidth: 8,
-      fillAfterStrokeEnabled: true,
-      shadowColor: 'white',
-      shadowBlur: 15,
-      shadowOffset: { x: 0, y: 0 },
-      shadowOpacity: 1,
-      draggable: true,
-      x: 50,
-      y: 200,
-    });
-    layer.add(quoteText);
-    quoteTextTr = addTransformer(layer, quoteText);
-
-    // Name
-    const nameText = new Konva.Text({
-      fontSize: 200,
-      fontFamily: 'ThaiSansNeue',
-      fontStyle: 'bold',
-      fill: '#000',
-      text: nickname,
-      stroke: '#fff',
-      strokeWidth: 8,
-      fillAfterStrokeEnabled: true,
-      shadowColor: 'white',
-      shadowBlur: 15,
-      shadowOffset: { x: 0, y: 0 },
-      shadowOpacity: 1,
-      draggable: true,
-      x: 50,
-      y: 500,
-    });
-    layer.add(nameText);
-    nameTextTr = addTransformer(layer, nameText);
-
-    // Details
-    const detailsText = new Konva.Text({
+    // Line2
+    const line2Text = new Konva.Text({
       fontSize: 64,
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'bold',
       fill: '#000',
-      text: nickname,
+      text: line_2,
       stroke: '#fff',
-      strokeWidth: 8,
+      strokeWidth: 5,
       fillAfterStrokeEnabled: true,
       shadowColor: 'white',
       shadowBlur: 15,
       shadowOffset: { x: 0, y: 0 },
       shadowOpacity: 1,
       draggable: true,
-      x: 50,
-      y: 720,
+      x: 100,
+      y: 450,
     });
-    layer.add(detailsText);
-    detailsTextTr = addTransformer(layer, detailsText);
+    layer.add(line2Text);
+    line2TextTr = addTransformer(layer, line2Text);
+
+    // Line3
+    const line3Text = new Konva.Text({
+      fontSize: 64,
+      fontFamily: 'ThaiSansNeue',
+      fontStyle: 'bold',
+      fill: '#000',
+      text: line_3,
+      stroke: '#fff',
+      strokeWidth: 5,
+      fillAfterStrokeEnabled: true,
+      shadowColor: 'white',
+      shadowBlur: 15,
+      shadowOffset: { x: 0, y: 0 },
+      shadowOpacity: 1,
+      draggable: true,
+      x: 200,
+      y: 800,
+    });
+    layer.add(line3Text);
+    line3TextTr = addTransformer(layer, line3Text);
 
     // Credit
     const creditsText = new Konva.Text({
@@ -224,20 +183,20 @@
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'bold',
       fill: '#000',
-      text: nickname,
+      text: '',
       stroke: '#fff',
-      strokeWidth: 8,
+      strokeWidth: 4,
       fillAfterStrokeEnabled: true,
       shadowColor: 'white',
       shadowBlur: 15,
       shadowOffset: { x: 0, y: 0 },
       shadowOpacity: 1,
       draggable: true,
-      x: 790,
+      x: 400,
       y: 1040,
     });
     layer.add(creditsText);
-    creditsText.text('https://olym-pic.vercel.app');
+    creditsText.text('https://seri-answers.vercel.app');
 
     const eventResizeHandler = () => {
       const container = document.getElementById('canvasParent');
@@ -252,30 +211,25 @@
     previewImage = (e, imageId) => {
       const input = e.target as HTMLInputElement;
       const url = URL.createObjectURL(input.files[0]);
-      const switcher = imageId === 'background' ? backgroundSwitcher : personSwitcher;
+      const switcher = backgroundSwitcher;
       switcher.switchImage(url);
     };
     usePresetBackgroundImage = (image: string) => {
       backgroundSwitcher.switchImage(image);
     };
     previewText = (newText, textType) => {
-      if (textType === 'title') {
-        const textShape = titleText;
+      if (textType === 'line_1') {
+        const textShape = line1Text;
         textShape.text(newText);
         layer.batchDraw();
       }
-      if (textType === 'quote') {
-        const textShape = quoteText;
+      if (textType === 'line_2') {
+        const textShape = line2Text;
         textShape.text(newText);
         layer.batchDraw();
       }
-      if (textType === 'nickname') {
-        const textShape = nameText;
-        textShape.text(newText);
-        layer.batchDraw();
-      }
-      if (textType === 'details') {
-        const textShape = detailsText;
+      if (textType === 'line_3') {
+        const textShape = line3Text;
         textShape.text(newText);
         layer.batchDraw();
       }
@@ -294,18 +248,13 @@
     });
   });
 
-  let title: string = 'International Meme Olympiad (IMO2021)';
-  let quote: string = 'หนทางหมื่นลี้\n  เริ่มพรุ่งนี้ก็แล้วกัน';
-  let nickname: string = 'จอห์น';
-  let details: string =
-    'นายจอห์น ชาวไร่\nโรงเรียนมัธยมหมีใหญ่\nผู้แทนประเทศไทย\nวิชาลูุกเสือสามัญประจำบ้าน\nประจำปี 2564';
-  let bgOpacity: number = 1.0;
+  let line_1: string = 'เรามี...';
+  let line_2: string = 'ดังนั้นเราจึงต้อง...';
+  let line_3: string = 'แล้วใช้...';
 
-  $: previewText?.(title, 'title');
-  $: previewText?.(`"${quote}"`, 'quote');
-  $: previewText?.(nickname, 'nickname');
-  $: previewText?.(details, 'details');
-  $: updateOpacity?.(bgOpacity);
+  $: previewText?.(line_1, 'line_1');
+  $: previewText?.(line_2, 'line_2');
+  $: previewText?.(line_3, 'line_3');
 
   function downloadURI(uri, name) {
     const link = document.createElement('a');
@@ -317,33 +266,30 @@
   }
 
   function download() {
-    titleTextTr.hide();
-    quoteTextTr.hide();
-    nameTextTr.hide();
-    detailsTextTr.hide();
-    personImageTr.hide();
+    line1TextTr.hide();
+    line2TextTr.hide();
+    line3TextTr.hide();
+
     const exportLayer = layer.clone({ listening: false });
     exportStage.add(exportLayer);
 
     const dataURL = exportStage.toDataURL({
       mimeType: 'image/jpeg',
     });
-    downloadURI(dataURL, 'OlymPic-download');
+    downloadURI(dataURL, 'seri-answers-download');
     exportStage.removeChildren();
 
     setTimeout(() => {
-      titleTextTr.show();
-      quoteTextTr.show();
-      nameTextTr.show();
-      detailsTextTr.show();
-      personImageTr.show();
+      line1TextTr.show();
+      line2TextTr.show();
+      line3TextTr.show();
     }, 300);
   }
 </script>
 
 <main class={tw`h-screen flex flex-col items-center mt-8`}>
-  <h1 class={tw`text(6xl) my-2`}>OlymPic</h1>
-  <p>Generate รูปคำคมแบบเด็กโอลิมปิควิชาการ</p>
+  <h1 class={tw`text(6xl) my-2`}>Seri Answers</h1>
+  <p>สร้างคำตอบอย่างเสรี</p>
   <div class={tw`w-full flex flex-col lg:flex-row w-[96vw] lg:w-[80vw] h-3/5 mt-4`}>
     <div id="canvasParent" class={tw`w-full lg:w-1/2 text(center) flex items-start mb-4`}>
       <div id="canvasEditor" class={tw`w-full h-full`} />
@@ -351,90 +297,24 @@
 
     <div class={tw`w-full lg:w-1/2 pl-0 lg:pl-4 flex-col items-start`}>
       <div class={tw`my-2`}>
-        ใช้พื้นหลังจาก<a
-          href="https://www.facebook.com/permalink.php?story_fbid=4162146883854761&id=486688764733943"
-          target="_blank"
-          rel="noreferrer"
-          class="text-bold underline">เพจ Olympic สสวท.</a
-        >
-        <button
-          on:click={() => usePresetBackgroundImage(greenBackground)}
-          class={tw`bg-green-200 border rounded px-4 py-1 ml-1`}>สีเขียว</button
-        >
-        <button
-          on:click={() => usePresetBackgroundImage(blueBackground)}
-          class={tw`bg-blue-200 border rounded px-4 py-1 ml-1`}>สีฟ้า</button
-        >
-        <button
-          on:click={() => usePresetBackgroundImage(orangeBackground)}
-          class={tw`bg-yellow-500 border rounded px-4 py-1 ml-1`}>สีส้ม</button
-        >
-        <button
-          on:click={() => usePresetBackgroundImage(grayBackground)}
-          class={tw`bg-gray-200 border rounded px-4 py-1 ml-1`}>สีเทา</button
-        >
-      </div>
-      <div class={tw`mb-2`}>
-        <label class="block text-lg text-gray-700" for="background"
-          >หรือ อัปโหลดรูปพื้นหลังเอง
-          <input
-            type="file"
-            id="background"
-            accept="image/*"
-            on:change={(event) => previewImage(event, 'background')}
-            class={tw`text-base`}
-          /></label
-        >
-      </div>
-      <div class={tw`my-2`}>
-        พื้นหลังโปร่งใส <input type="range" min="0" max="1" bind:value={bgOpacity} step="0.01" />
-      </div>
-      <div class={tw`my-2`}>
-        <label class="block text-lg text-gray-700" for="person"
-          >รูปคน <input
-            type="file"
-            id="person"
-            accept="image/*"
-            on:change={(event) => previewImage(event, 'person')}
-            class={tw`text-base`}
-          /></label
-        >
-        <div class={tw`text-gray-500`}>
-          หากต้องการลบพื้นหลัง ให้ใช้เว็บ <a
-            href="https://remove.bg"
-            target="_blank"
-            rel="noreferrer"
-            class={tw`font-bold underline text-black`}>remove.bg</a
-          >
-        </div>
-      </div>
-      <div class={tw`my-2`}>
-        รายการแข่ง <input
+        Line 1. <input
           type="text"
-          bind:value={title}
+          bind:value={line_1}
           class={tw`mt-1 p-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border border-gray-300 rounded-md`}
         />
       </div>
       <div class={tw`my-2`}>
-        คำคม <textarea
-          bind:value={quote}
-          class={tw`mt-1 p-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border border-gray-300 rounded-md`}
-          rows="2"
-        />
-      </div>
-      <div class={tw`my-2`}>
-        ชื่อเล่น <input
+        Line 2. <input
           type="text"
-          bind:value={nickname}
+          bind:value={line_2}
           class={tw`mt-1 p-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border border-gray-300 rounded-md`}
         />
       </div>
       <div class={tw`my-2`}>
-        ข้อมูล
-        <textarea
-          bind:value={details}
+        Line 3. <input
+          type="text"
+          bind:value={line_3}
           class={tw`mt-1 p-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm border border-gray-300 rounded-md`}
-          rows="5"
         />
       </div>
 
@@ -451,7 +331,7 @@
     <Facebook class={tw`h-10 w-10`} {url} />
     <Twitter class={tw`h-10 w-10`} text="" {url} />
     <a
-      href="https://github.com/narze/OlymPic"
+      href="https://github.com/narze/seri-answers"
       target="_blank"
       rel="noreferrer"
       class={tw`inline-block relative top-[5px] bg-white`}
