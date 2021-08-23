@@ -117,6 +117,7 @@
     // Line1
     const line1Text = new Konva.Text({
       align: 'center',
+      verticalAlign: 'middle',
       fontSize: 96,
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'bold',
@@ -125,6 +126,8 @@
       draggable: true,
       x: 100,
       y: 130,
+      width: sceneWidth - 100 * 2,
+      height: 200,
     });
     layer.add(line1Text);
     line1TextTr = addTransformer(layer, line1Text);
@@ -132,6 +135,7 @@
     // Line2
     const line2Text = new Konva.Text({
       align: 'center',
+      verticalAlign: 'middle',
       fontSize: 96,
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'italic bold',
@@ -140,6 +144,8 @@
       draggable: true,
       x: 100,
       y: 480,
+      width: sceneWidth - 100 * 2,
+      height: 200,
     });
     layer.add(line2Text);
     line2TextTr = addTransformer(layer, line2Text);
@@ -147,6 +153,7 @@
     // Line3
     const line3Text = new Konva.Text({
       align: 'center',
+      verticalAlign: 'middle',
       fontSize: 84,
       fontFamily: 'ThaiSansNeue',
       fontStyle: 'bold',
@@ -154,7 +161,9 @@
       text: line_3,
       draggable: true,
       x: 200,
-      y: 800,
+      y: 780,
+      width: sceneWidth - 200 * 2,
+      height: 200,
     });
     layer.add(line3Text);
     line3TextTr = addTransformer(layer, line3Text);
@@ -276,8 +285,17 @@
   <h1 class={tw`text(6xl) my-2`}>Seri Answers</h1>
   <p>สร้างคำตอบแบบเสรีๆ</p>
   <div class={tw`w-full flex flex-col lg:flex-row w-[96vw] lg:w-[80vw] h-3/5 mt-4`}>
-    <div id="canvasParent" class={tw`w-full lg:w-1/2 text(center) flex items-start mb-4`}>
-      <div id="canvasEditor" class={tw`w-full h-full`} />
+    <div>
+      <div id="canvasParent" class={tw`w-full lg:w-1/2 text(center) flex items-start mb-4`}>
+        <div id="canvasEditor" class={tw`w-full h-full`} />
+      </div>
+      <div>
+        <a
+          class={tw`underline italic`}
+          href="https://www.facebook.com/researcher.th"
+          target="_blank">ขอบคุณภาพจาก The Researcher</a
+        >
+      </div>
     </div>
 
     <div class={tw`w-full lg:w-1/2 pl-0 lg:pl-4 flex-col items-start`}>
